@@ -23,12 +23,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.developerandroid.mywishlistapp.data.DummyWish
 import com.developerandroid.mywishlistapp.data.Wish
 
 
 @Composable
-fun HomeView(){
+fun HomeView(
+    navController: NavController,
+    viewModel: WishViewModel
+
+){
 
     val context = LocalContext.current
     Scaffold(
@@ -44,6 +49,9 @@ fun HomeView(){
                 contentColor = Color.White,
                 containerColor = Color.Black,
                 onClick = {
+                    Toast.makeText(context, "FAButton Clicked", Toast.LENGTH_LONG).show()
+                    //Isso que faz com que ao clicar no botão, a tela seja trocada.
+                    navController.navigate(Screen.AddScreen.route)
                     // TODO Add Navigation to add screen
                 }
             ) {
@@ -58,7 +66,7 @@ fun HomeView(){
             items(DummyWish.wishList){
                 wish -> WishItem(wish = wish) { }
             }
-            
+
         }
     }
 }
